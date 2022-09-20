@@ -1,0 +1,30 @@
+<section class="section level">
+  <div class="level-left">
+    <div class="container">
+      <h1 class="title is-1"><%= @book.title %></h1>
+      <h2 class="subtitle is-2"><%= @book.author.name %></h2>
+    </div>
+  </div>
+  <div class="level-right">
+    <div class="level-item">
+      <table class="table">
+        <tr>
+          <td>Genre</td>
+          <td><%= @book.genre %></td>
+        </tr>
+        <tr>
+          <td>First published</td>
+          <td><%= @book.first_published.strftime("%Y") %></td>
+        </tr>
+        <tr>
+          <td>Language</td>
+          <td><%= @book.language %></td>
+        </tr>
+        <tr>
+          <td>ISBN</td>
+          <td><%= @book.ISBN %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</section>

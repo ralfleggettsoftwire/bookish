@@ -1,0 +1,17 @@
+<section class="section level">
+  <h1 class="title is-1">All Books</h1>
+</section>
+
+<section class="section level">
+  <table class="table is-hoverable is-fullwidth">
+    <tbody>
+      <% @books.each do |book| %>
+        <tr>
+          <td><h4 class="title is-4"><%= link_to book.title, book_path(book) %></h4></td>
+          <td><h5 class="subtitle is-5"><%= book.author.name %></h5></td>
+          <td><p><%= book.first_published.strftime('%Y') %></p></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</section>
