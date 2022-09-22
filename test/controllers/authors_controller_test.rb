@@ -1,38 +1,48 @@
 require "test_helper"
 
 class AuthorsControllerTest < ActionDispatch::IntegrationTest
+  setup do
+    @author = authors(:one)
+  end
+
   test "should get index" do
-    get authors_index_url
+    get authors_url
     assert_response :success
   end
 
   test "should get new" do
-    get authors_new_url
+    get new_author_url
     assert_response :success
   end
 
-  test "should get create" do
-    get authors_create_url
-    assert_response :success
+  test "should create author" do
+    assert_difference("Author.count") do
+      post authors_url, params: { author: {  } }
+    end
+
+    assert_redirected_to author_url(Author.last)
   end
 
-  test "should get show" do
-    get authors_show_url
+  test "should show author" do
+    get author_url(@author)
     assert_response :success
   end
 
   test "should get edit" do
-    get authors_edit_url
+    get edit_author_url(@author)
     assert_response :success
   end
 
-  test "should get update" do
-    get authors_update_url
-    assert_response :success
+  test "should update author" do
+    patch author_url(@author), params: { author: {  } }
+    assert_redirected_to author_url(@author)
   end
 
-  test "should get destroy" do
-    get authors_destroy_url
-    assert_response :success
+  test "should destroy author" do
+    assert_difference("Author.count", -1) do
+      delete author_url(@author)
+    end
+
+    assert_redirected_to authors_url
   end
 end

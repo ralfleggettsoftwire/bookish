@@ -1,2 +1,81 @@
-<h1>Copies#index</h1>
-<p>Find me in app/views/copies/index.html.erb</p>
+<% if notice %>
+  <section class="section">
+    <p style="color: green"><%= notice %></p>
+  </section>
+<% end %>
+
+<section class="section">
+  <div class="columns">
+    <div class="column is-9">
+      <div class="container block">
+        <h4 class="title is-4">Copies of <%= @book.title %></h4>
+      </div>
+
+      <div class="container block">
+        <div class="block">
+          <h5 class="subtitle is-5">
+            <%= "#{@available_copies.length} #{@available_copies.length == 1 ? 'copy' : 'copies'}" %> available
+          </h5>
+        </div>
+        <% if @available_copies.length > 0 %>
+          <div class="card block">
+            <div class="card-footer">
+              <div class="card-footer-item">
+                <%= link_to "Borrow a copy", edit_book_copy_path(@available_copies[0].book_id, @available_copies[0].id) %>
+              </div>
+              <div class="card-footer-item">
+                <%= button_to "Delete a copy", book_copy_path(@available_copies[0].book_id, @available_copies[0].id), method: :delete %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="container block">
+        <div class="block">
+          <h5 class="subtitle is-5">
+            <%= "#{@on_loan_copies.length} #{@on_loan_copies.length == 1 ? 'copy' : 'copies'}" %> on loan
+          </h5>
+        </div>
+        <div class="columns">
+          <div class="column is-12">
+            <% @on_loan_copies.each do |copy| %>
+              <div class="card block">
+                <div class="card-content"><%= render copy %></div>
+                <div class="card-footer">
+                  <div class="card-footer-item">
+                    <%= button_to "Return this copy", book_copy_path(copy.book_id, copy.id,
+                        params: {copy: {status: 'available', borrower: '', due_date: ''}}), method: :put %>
+                  </div>
+                  <div class="card-footer-item">
+                    <%= button_to "Delete this copy", book_copy_path(copy.book_id, copy.id), method: :delete %>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="column is-3 menu">
+      <p class="menu-label">
+        Modify copies
+      </p>
+      <ul class="menu-list">
+        <li><%= link_to "Add a copy", new_book_copy_path(@book) %></li>
+      </ul>
+      <p class="menu-label">
+        Related
+      </p>
+      <ul class="menu-list">
+        <li><%= link_to "See more from #{@book.author.name}", author_path(@book.author.id) %></li>
+        <li><%= link_to "See details of #{@book.title}", book_path(@book) %></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <%= link_to "Back to book", book_path(@book) %>
+</section>

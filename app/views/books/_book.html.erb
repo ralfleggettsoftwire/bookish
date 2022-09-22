@@ -1,0 +1,5 @@
+<div class="container" id="<%= dom_id book %>">
+  <div class="block"><h4 class="title is-4"><%= link_to book.title, book %></h4></div>
+  <div class="block"><h5 class="subtitle is-5"><%=link_to book.author.name, author_path(book.author.id) %></h5></div>
+  <div class="block"><p><%= book.first_published.strftime("%Y") %></p></div>
+</div>

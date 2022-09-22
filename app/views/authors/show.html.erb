@@ -1,2 +1,54 @@
-<h1>Authors#show</h1>
-<p>Find me in app/views/authors/show.html.erb</p>
+<% if notice %>
+  <section class="section">
+    <p style="color: green"><%= notice %></p>
+  </section>
+<% end %>
+
+<section class="section">
+  <div class="columns">
+    <div class="column is-9">
+      <div class="block">
+        <%= render @author %>
+      </div>
+
+      <div class="block">
+        <table class="table">
+          <tr>
+            <td>Nationality:</td>
+            <td><%= @author.nationality %></td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="block">
+        <h5 class="subtitle is-5">Books by <%= @author.name %>:</h5>
+      </div>
+
+      <div class="block columns">
+        <div class="column is-12">
+          <% @books.each do |book| %>
+            <div class="card block">
+              <div class="card-content">
+                <h6 class="subtitle is-6"><%= link_to book.title, book_path(book) %></h6>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div class="column is-3 menu">
+      <p class="menu-label">
+        Modify this author
+      </p>
+      <ul class="menu-list">
+        <li><%= link_to "Edit this author", edit_author_path(@author) %></li>
+        <li><%= button_to "Remove this author", @author, method: :delete %></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <%= link_to "Back to authors", authors_path %>
+</section>

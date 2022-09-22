@@ -1,0 +1,12 @@
+<div class="container" id="<%= dom_id copy %>">
+  <table class="table is-fullwidth">
+    <tr>
+      <td>Borrower:</td>
+      <td><%= copy.borrower %></td>
+    </tr>
+    <tr>
+      <td>Return due:</td>
+      <td><%= copy.due_date.strftime("%Y/%m/%d") %></td>
+    </tr>
+  </table>
+</div>

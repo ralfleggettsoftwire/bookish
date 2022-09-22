@@ -1,0 +1,4 @@
+<div class="container" id="<%= dom_id author %>">
+  <div class="block"><h4 class="title is-4"><%= link_to author.name, author %></h4></div>
+  <div class="block"><p><%= author.born.strftime("%Y") %> - <%= author.died.strftime("%Y") if author.died %></p></div>
+</div>

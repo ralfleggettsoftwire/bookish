@@ -1,0 +1,33 @@
+<%= form_with(model: author) do |form| %>
+  <% if author.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(author.errors.count, "error") %> prohibited this author from being saved:</h2>
+
+      <ul>
+        <% author.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <div class="field">
+      <%= form.label :name, 'Name:', class: 'label' %>
+      <%= form.text_field :name, class: 'input' %>
+    </div>
+    <div class="field">
+      <%= form.label :born, 'Born:', class: 'label' %>
+      <%= form.text_field :born, type: 'date', class: 'input' %>
+    </div>
+    <div class="field">
+      <%= form.label :died, 'Died:', class: 'label' %>
+      <%= form.text_field :died, type: 'date', class: 'input' %>
+    </div>
+    <div class="field">
+      <%= form.label :nationality, 'Nationality:', class: 'label' %>
+      <%= form.text_field :nationality, class: 'input' %>
+    </div>
+    <%= form.submit %>
+  </div>
+<% end %>

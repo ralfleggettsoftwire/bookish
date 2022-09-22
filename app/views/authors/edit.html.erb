@@ -1,2 +1,12 @@
-<h1>Authors#edit</h1>
-<p>Find me in app/views/authors/edit.html.erb</p>
+<section class="section level">
+  <h1 class="title is-1">Edit author</h1>
+</section>
+
+<section class="section">
+  <%= render "form", author: @author %>
+</section>
+
+<section class="section">
+  <%= link_to "Show this author", @author %> |
+  <%= link_to "Back to authors", authors_path %>
+</section>

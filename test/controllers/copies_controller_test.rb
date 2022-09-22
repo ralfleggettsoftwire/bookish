@@ -1,38 +1,48 @@
 require "test_helper"
 
 class CopiesControllerTest < ActionDispatch::IntegrationTest
+  setup do
+    @copy = copies(:one)
+  end
+
   test "should get index" do
-    get copies_index_url
+    get copies_url
     assert_response :success
   end
 
   test "should get new" do
-    get copies_new_url
+    get new_copy_url
     assert_response :success
   end
 
-  test "should get create" do
-    get copies_create_url
-    assert_response :success
+  test "should create copy" do
+    assert_difference("Copy.count") do
+      post copies_url, params: { copy: {  } }
+    end
+
+    assert_redirected_to copy_url(Copy.last)
   end
 
-  test "should get show" do
-    get copies_show_url
+  test "should show copy" do
+    get copy_url(@copy)
     assert_response :success
   end
 
   test "should get edit" do
-    get copies_edit_url
+    get edit_copy_url(@copy)
     assert_response :success
   end
 
-  test "should get update" do
-    get copies_update_url
-    assert_response :success
+  test "should update copy" do
+    patch copy_url(@copy), params: { copy: {  } }
+    assert_redirected_to copy_url(@copy)
   end
 
-  test "should get destroy" do
-    get copies_destroy_url
-    assert_response :success
+  test "should destroy copy" do
+    assert_difference("Copy.count", -1) do
+      delete copy_url(@copy)
+    end
+
+    assert_redirected_to copies_url
   end
 end

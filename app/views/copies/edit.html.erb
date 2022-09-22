@@ -1,2 +1,11 @@
-<h1>Copies#edit</h1>
-<p>Find me in app/views/copies/edit.html.erb</p>
+<section class="section level">
+  <h1 class="title is-1">Borrow a copy of <%= @book.title %></h1>
+</section>
+
+<section class="section">
+  <%= render "form", copy: @copy, book: @book %>
+</section>
+
+<section class="section">
+  <%= link_to "Back to copies", book_copies_path(@copy.book_id) %>
+</section>

@@ -1,30 +1,99 @@
-<section class="section level">
-  <div class="level-left">
-    <div class="container">
-      <h1 class="title is-1"><%= @book.title %></h1>
-      <h2 class="subtitle is-2"><%= @book.author.name %></h2>
+<% if notice %>
+  <section class="section">
+    <p style="color: green"><%= notice %></p>
+  </section>
+<% end %>
+
+<section class="section">
+  <div class="columns">
+    <div class="column is-9">
+      <div class="block">
+        <%= render @book %>
+      </div>
+
+      <div class="block">
+        <table class="table">
+          <tr>
+            <td>Genre</td>
+            <td><%= @book.genre %></td>
+          </tr>
+          <tr>
+            <td>Language</td>
+            <td><%= @book.language %></td>
+          </tr>
+          <tr>
+            <td>ISBN</td>
+            <td><%= @book.ISBN %></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="column is-3 menu">
+      <p class="menu-label">
+        Modify this book
+      </p>
+      <ul class="menu-list">
+        <li><%= link_to "Edit this book", edit_book_path(@book) %></li>
+        <li><%= button_to "Remove this book", @book, method: :delete %></li>
+      </ul>
+      <p class="menu-label">
+        Related
+      </p>
+      <ul class="menu-list">
+        <li><%= link_to "See more from #{@book.author.name}", author_path(@book.author.id) %></li>
+        <li><%= link_to "See copies of #{@book.title}", book_copies_path(@book.author.id) %></li>
+      </ul>
     </div>
   </div>
-  <div class="level-right">
-    <div class="level-item">
-      <table class="table">
-        <tr>
-          <td>Genre</td>
-          <td><%= @book.genre %></td>
-        </tr>
-        <tr>
-          <td>First published</td>
-          <td><%= @book.first_published.strftime("%Y") %></td>
-        </tr>
-        <tr>
-          <td>Language</td>
-          <td><%= @book.language %></td>
-        </tr>
-        <tr>
-          <td>ISBN</td>
-          <td><%= @book.ISBN %></td>
-        </tr>
-      </table>
+</section>
+
+<section class="section">
+  <div class="columns">
+    <div class="column is-9">
+      <div class="block">
+        <div class="block">
+          <h4 class="title is-4"><%= link_to "Copies of #{@book.title}", book_copies_path(@book) %></h4>
+        </div>
+
+        <div class="card block">
+          <div class="card-content">
+            <h5 class="subtitle is-5">
+              <%= "#{@available_copies.length} #{@available_copies.length == 1 ? 'copy' : 'copies'}" %> available
+            </h5>
+          </div>
+          <div class="card-footer">
+            <div class="card-footer-item">
+              <%= link_to "Add a copy", new_book_copy_path(@book) %>
+            </div>
+            <% if @available_copies.length > 0 %>
+              <div class="card-footer-item">
+                <%= link_to "Borrow a copy", edit_book_copy_path(@available_copies[0].book_id, @available_copies[0].id) %>
+              </div>
+              <div class="card-footer-item">
+                <%= button_to "Delete a copy", book_copy_path(@available_copies[0].book_id, @available_copies[0].id), method: :delete %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="card block">
+          <div class="card-content">
+            <h5 class="subtitle is-5">
+              <%= "#{@on_loan_copies.length} #{@on_loan_copies.length == 1 ? 'copy' : 'copies'}" %> on loan
+            </h5>
+          </div>
+          <div class="card-footer">
+            <div class="card-footer-item">
+              <%= link_to "Return a copy", book_copies_path(@book) %>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+</section>
+
+<section class="section">
+  <%= link_to "Back to books", books_path %>
 </section>

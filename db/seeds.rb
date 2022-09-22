@@ -14,7 +14,7 @@ fitzgerald = Author.create(
 
 gatsby = Book.create(
   title: 'The Great Gatsby',
-  genre: 'Fiction',
+  genre: 'American Literature',
   first_published: Date.parse('1925-04-10'),
   language: 'English',
   ISBN: '9780684801520'
@@ -28,6 +28,12 @@ gatsby_copy_1 = Copy.create(
 
 gatsby_copy_2 = Copy.create(status: 'available')
 
+gatsby_copy_3 = Copy.create(
+  status: 'on loan',
+  borrower: 'Sam Smith',
+  due_date: Date.parse('2022-10-10')
+)
+
 jazz_age = Book.create(
   title: 'Tales of the Jazz Age',
   genre: 'Short Fiction Collection',
@@ -40,12 +46,57 @@ jazz_age_copy_1 = Copy.create(status: 'available')
 jazz_age_copy_2 = Copy.create(status: 'available')
 jazz_age_copy_3 = Copy.create(status: 'available')
 
+tender_night = Book.create(
+  title: 'Tender is the Night',
+  genre: 'American Literature',
+  first_published: Date.parse('1934-04-12'),
+  language: 'English',
+  ISBN: '9780241341483'
+)
+
+tender_night_copy_1 = Copy.create(
+  status: 'on loan',
+  borrower: 'Jane Doe',
+  due_date: Date.parse('2022-10-28')
+)
+tender_night_copy_2 = Copy.create(status: 'available')
+tender_night_copy_3 = Copy.create(status: 'available')
+
 fitzgerald.books << gatsby
 fitzgerald.books << jazz_age
+fitzgerald.books << tender_night
 
 gatsby.copies << gatsby_copy_1
 gatsby.copies << gatsby_copy_2
+gatsby.copies << gatsby_copy_3
 
 jazz_age.copies << jazz_age_copy_1
 jazz_age.copies << jazz_age_copy_2
 jazz_age.copies << jazz_age_copy_3
+
+tender_night.copies << tender_night_copy_1
+tender_night.copies << tender_night_copy_2
+tender_night.copies << tender_night_copy_3
+
+harper_lee = Author.create(
+  name: 'Nelle Harper Lee',
+  born: Date.parse('1926-04-28'),
+  died: Date.parse('2016-02-19'),
+  nationality: 'American'
+)
+
+mockingbird = Book.create(
+  title: 'To Kill a Mockingbird',
+  genre: 'Adolescent Literature',
+  first_published: Date.parse('1960-07-11'),
+  language: 'English',
+  ISBN: '9780099419785 '
+)
+
+mockingbird_copy_1 = Copy.create(status: 'available')
+mockingbird_copy_2 = Copy.create(status: 'available')
+
+harper_lee.books << mockingbird
+
+mockingbird.copies << mockingbird_copy_1
+mockingbird.copies << mockingbird_copy_2

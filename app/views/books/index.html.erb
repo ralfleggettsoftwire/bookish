@@ -1,17 +1,27 @@
-<section class="section level">
-  <h1 class="title is-1">All Books</h1>
+<section class="section">
+  <h1 class="title is-1">Books</h1>
+</section>
+
+<% if notice %>
+  <section class="section">
+    <p style="color: green"><%= notice %></p>
+  </section>
+<% end %>
+
+<section class="section">
+  <div class="columns">
+    <% (0..2).each do |i| %>
+      <div class="column is-4">
+        <% @column_books[i].each do |book| %>
+          <div class="card block">
+            <div class="card-content"><%= render book %></div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
 </section>
 
 <section class="section level">
-  <table class="table is-hoverable is-fullwidth">
-    <tbody>
-      <% @books.each do |book| %>
-        <tr>
-          <td><h4 class="title is-4"><%= link_to book.title, book_path(book) %></h4></td>
-          <td><h5 class="subtitle is-5"><%= book.author.name %></h5></td>
-          <td><p><%= book.first_published.strftime('%Y') %></p></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+    <%= link_to "Add a new book", new_book_path %>
 </section>
