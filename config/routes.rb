@@ -1,7 +1,13 @@
 Rails.application.routes.draw do
+  devise_for :users
   resources :authors
   resources :books do
     resources :copies, only: [:index, :edit, :create, :update, :destroy, :new]
+  end
+
+  devise_scope :user do
+    # Redirects signing out users back to sign-in
+    get "users", to: "devise/sessions#new"
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

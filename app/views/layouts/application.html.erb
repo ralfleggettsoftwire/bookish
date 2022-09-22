@@ -20,8 +20,27 @@
           <%= link_to "Books", books_path, class: "navbar-item" %>
           <%= link_to "Authors", authors_path, class: "navbar-item" %>
         </div>
+        <div class="navbar-end">
+          <% if !user_signed_in? %>
+            <%= link_to "Log in", new_user_session_path, class: "navbar-item" %>
+            <%= link_to "Sign up", new_user_registration_path, class: "navbar-item" %>
+          <% else %>
+            <%= link_to "Account", edit_user_registration_path, class: "navbar-item" %>
+          <% end %>
+        </div>
       </div>
-    </nav>
+    </nav>g
+
+    <% if notice %>
+      <section class="section">
+        <p class="alert alert-success has-text-success"><%= notice %></p>
+      </section>
+    <% end %>
+    <% if alert %>
+      <section class="section">
+        <p class="alert alert-danger has-text-danger"><%= notice %></p>
+      </section>
+    <% end %>
 
     <%= yield %>
 

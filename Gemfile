@@ -73,3 +73,4 @@ end
 
 gem "bulma-rails"
 gem 'pagy'
+gem "devise", "~> 4.8"
