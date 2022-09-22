@@ -1,33 +1,39 @@
 <%= form_with(model: author) do |form| %>
   <% if author.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(author.errors.count, "error") %> prohibited this author from being saved:</h2>
-
-      <ul>
-        <% author.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
+    <h5 class="subtitle is-5 has-text-danger">
+      <%= pluralize(author.errors.count, "error") %> prohibited this book from being saved
+    </h5>
   <% end %>
 
   <div>
     <div class="field">
       <%= form.label :name, 'Name:', class: 'label' %>
       <%= form.text_field :name, class: 'input' %>
+      <% author.errors.full_messages_for(:name).each do |msg| %>
+        <p class="has-text-danger"><%= msg %></p>
+      <% end %>
     </div>
     <div class="field">
       <%= form.label :born, 'Born:', class: 'label' %>
       <%= form.text_field :born, type: 'date', class: 'input' %>
+      <% author.errors.full_messages_for(:born).each do |msg| %>
+        <p class="has-text-danger"><%= msg %></p>
+      <% end %>
     </div>
     <div class="field">
       <%= form.label :died, 'Died:', class: 'label' %>
       <%= form.text_field :died, type: 'date', class: 'input' %>
+      <% author.errors.full_messages_for(:died).each do |msg| %>
+        <p class="has-text-danger"><%= msg %></p>
+      <% end %>
     </div>
     <div class="field">
       <%= form.label :nationality, 'Nationality:', class: 'label' %>
       <%= form.text_field :nationality, class: 'input' %>
+      <% author.errors.full_messages_for(:nationality).each do |msg| %>
+        <p class="has-text-danger"><%= msg %></p>
+      <% end %>
     </div>
-    <%= form.submit %>
+    <%= form.submit class: 'button' %>
   </div>
 <% end %>

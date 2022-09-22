@@ -1,14 +1,8 @@
 <%= form_with(model: [book, copy]) do |form| %>
   <% if copy.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(copy.errors.count, "error") %> prohibited this copy from being saved:</h2>
-
-      <ul>
-        <% copy.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
+    <h5 class="subtitle is-5 has-text-danger">
+      <%= pluralize(copy.errors.count, "error") %> prohibited this book from being saved
+    </h5>
   <% end %>
 
   <div>
@@ -16,11 +10,17 @@
     <div class="field">
       <%= form.label :borrower, 'Borrower\'s name:', class: 'label' %>
       <%= form.text_field :borrower, class: 'input' %>
+      <% copy.errors.full_messages_for(:borrower).each do |msg| %>
+        <p class="has-text-danger"><%= msg %></p>
+      <% end %>
     </div>
     <div class="field">
       <%= form.label :due_date, 'Return due date:', class: 'label' %>
       <%= form.text_field :due_date, type: 'date', class: 'input' %>
+      <% copy.errors.full_messages_for(:due_date).each do |msg| %>
+        <p class="has-text-danger"><%= msg %></p>
+      <% end %>
     </div>
-    <%= form.submit %>
+    <%= form.submit class: 'button' %>
   </div>
 <% end %>

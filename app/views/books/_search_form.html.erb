@@ -1,0 +1,25 @@
+<%= form_with(scope: :book, method: :get) do |form| %>
+  <div class="block">
+    <h5 class="subtitle is-5">Search for books</h5>
+  </div>
+  <div class="block">
+    <div class="field">
+      <%= form.label :title, 'Title:', class: 'label' %>
+      <%= form.text_field :title, class: 'input' %>
+    </div>
+    <div class="field">
+      <%= form.label :genre, 'Genre:', class: 'label' %>
+      <%= form.text_field :genre, class: 'input' %>
+    </div>
+    <div class="field">
+      <%= form.label :language, 'Language:', class: 'label' %>
+      <%= form.text_field :language, class: 'input' %>
+    </div>
+    <div class="field">
+      <%= form.label :ISBN, 'ISBN:', class: 'label' %>
+      <%= form.text_field :ISBN, class: 'input' %>
+    </div>
+    <%= form.submit 'Search', name: 'search', class: 'button' %>
+  </div>
+<% end %>
+

@@ -3,9 +3,13 @@ class BooksController < ApplicationController
 
   # GET /books or /books.json
   def index
-    @books = Book.all.order(:title)
-    @column_books = { 0 => [], 1 => [], 2 => []  }
-    (0...@books.length).each { |i| @column_books[i % 3] << @books[i] }
+    if params.has_key?('search')
+      books = Book.search(book_params)
+    else
+      books = Book.all
+    end
+    @count = books.length
+    @pagy, @books = pagy(books.order(:title), items: 10)
   end
 
   # GET /books/1 or /books/1.json
@@ -41,6 +45,7 @@ class BooksController < ApplicationController
 
   # PATCH/PUT /books/1 or /books/1.json
   def update
+    puts @book.errors
     respond_to do |format|
       if @book.update(book_params)
         format.html { redirect_to book_url(@book), notice: "Book was successfully updated." }

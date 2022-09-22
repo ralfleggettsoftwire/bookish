@@ -1,5 +1,10 @@
 <section class="section">
-  <h1 class="title is-1">Books</h1>
+  <div class="block">
+    <h1 class="title is-1">Books</h1>
+  </div>
+  <div class="block">
+    <h4 class="subtitle is-4">Showing <%= @books.length %> out of <%= @count %> books</h4>
+  </div>
 </section>
 
 <% if notice %>
@@ -10,15 +15,18 @@
 
 <section class="section">
   <div class="columns">
-    <% (0..2).each do |i| %>
-      <div class="column is-4">
-        <% @column_books[i].each do |book| %>
-          <div class="card block">
-            <div class="card-content"><%= render book %></div>
-          </div>
-        <% end %>
-      </div>
-    <% end %>
+    <div class="column is-9">
+      <% @books.each do |book| %>
+        <div class="card block">
+          <div class="card-content"><%= render book %></div>
+        </div>
+      <% end %>
+      <%== pagy_bulma_nav(@pagy) %>
+    </div>
+
+    <div class="column is-3">
+      <%= render "search_form" %>
+    </div>
   </div>
 </section>
 

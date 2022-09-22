@@ -1,41 +1,53 @@
 <%= form_with(model: book) do |form| %>
   <% if book.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(book.errors.count, "error") %> prohibited this book from being saved:</h2>
-
-      <ul>
-        <% book.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
+    <h5 class="subtitle is-5 has-text-danger">
+      <%= pluralize(book.errors.count, "error") %> prohibited this book from being saved
+    </h5>
   <% end %>
 
   <div>
     <div class="field">
       <%= form.label :title, 'Title:', class: 'label' %>
       <%= form.text_field :title, class: 'input' %>
+      <% book.errors.full_messages_for(:title).each do |msg| %>
+        <p class="has-text-danger"><%= msg %></p>
+      <% end %>
     </div>
     <div class="field">
       <%= form.label :author_id, 'Author:', class: 'label' %>
       <%= form.select :author_id, Author.all.collect { |a| [a.name, a.id] }, {:prompt => 'Select author'}, {class: 'select is-multiple'} %>
+      <% book.errors.full_messages_for(:author_id).each do |msg| %>
+        <p class="has-text-danger"><%= msg %></p>
+      <% end %>
     </div>
     <div class="field">
       <%= form.label :genre, 'Genre:', class: 'label' %>
       <%= form.text_field :genre, class: 'input' %>
+      <% book.errors.full_messages_for(:genre).each do |msg| %>
+        <p class="has-text-danger"><%= msg %></p>
+      <% end %>
     </div>
     <div class="field">
       <%= form.label :first_published, 'First published:', class: 'label' %>
       <%= form.text_field :first_published, prompt: 'Year', type:'date', class: 'input' %>
+      <% book.errors.full_messages_for(:first_published).each do |msg| %>
+        <p class="has-text-danger"><%= msg %></p>
+      <% end %>
     </div>
     <div class="field">
       <%= form.label :language, 'Language:', class: 'label' %>
       <%= form.text_field :language, class: 'input' %>
+      <% book.errors.full_messages_for(:language).each do |msg| %>
+        <p class="has-text-danger"><%= msg %></p>
+      <% end %>
     </div>
     <div class="field">
       <%= form.label :ISBN, 'ISBN:', class: 'label' %>
       <%= form.text_field :ISBN, class: 'input' %>
+      <% book.errors.full_messages_for(:ISBN).each do |msg| %>
+        <p class="has-text-danger"><%= msg %></p>
+      <% end %>
     </div>
-    <%= form.submit %>
+    <%= form.submit class: 'button' %>
   </div>
 <% end %>

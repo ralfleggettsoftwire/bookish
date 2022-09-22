@@ -59,7 +59,7 @@
         <div class="card block">
           <div class="card-content">
             <h5 class="subtitle is-5">
-              <%= "#{@available_copies.length} #{@available_copies.length == 1 ? 'copy' : 'copies'}" %> available
+              <%= pluralize(@available_copies.length, 'copy') %> available
             </h5>
           </div>
           <div class="card-footer">
@@ -80,7 +80,7 @@
         <div class="card block">
           <div class="card-content">
             <h5 class="subtitle is-5">
-              <%= "#{@on_loan_copies.length} #{@on_loan_copies.length == 1 ? 'copy' : 'copies'}" %> on loan
+              <%= pluralize(@on_loan_copies.length, 'copy') %> on loan
             </h5>
           </div>
           <div class="card-footer">
