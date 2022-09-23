@@ -1,9 +1,3 @@
-<% if notice %>
-  <section class="section">
-    <p style="color: green"><%= notice %></p>
-  </section>
-<% end %>
-
 <section class="section">
   <div class="columns">
     <div class="column is-9">
@@ -43,10 +37,12 @@
               <div class="card block">
                 <div class="card-content"><%= render copy %></div>
                 <div class="card-footer">
-                  <div class="card-footer-item">
-                    <%= button_to "Return this copy", book_copy_path(copy.book_id, copy.id,
-                        params: {copy: {status: 'available', borrower: '', due_date: ''}}), method: :put %>
-                  </div>
+                  <% if user_signed_in? && copy.user_id == current_user.id %>
+                    <div class="card-footer-item">
+                      <%= button_to "Return this copy", book_copy_path(copy.book_id, copy.id,
+                          params: {copy: {status: 'available', user_id: '', due_date: ''}}), method: :put %>
+                    </div>
+                  <% end %>
                   <div class="card-footer-item">
                     <%= button_to "Delete this copy", book_copy_path(copy.book_id, copy.id), method: :delete %>
                   </div>

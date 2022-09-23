@@ -7,13 +7,7 @@
 
   <div>
     <%= form.hidden_field :status, value: 'on loan' %>
-    <div class="field">
-      <%= form.label :borrower, 'Borrower\'s name:', class: 'label' %>
-      <%= form.text_field :borrower, class: 'input' %>
-      <% copy.errors.full_messages_for(:borrower).each do |msg| %>
-        <p class="has-text-danger"><%= msg %></p>
-      <% end %>
-    </div>
+    <%= form.hidden_field :user_id, value: current_user.id %>
     <div class="field">
       <%= form.label :due_date, 'Return due date:', class: 'label' %>
       <%= form.text_field :due_date, type: 'date', class: 'input' %>
@@ -21,6 +15,6 @@
         <p class="has-text-danger"><%= msg %></p>
       <% end %>
     </div>
-    <%= form.submit class: 'button' %>
+    <%= form.submit 'Borrow copy', class: 'button' %>
   </div>
 <% end %>

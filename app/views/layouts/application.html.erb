@@ -26,10 +26,11 @@
             <%= link_to "Sign up", new_user_registration_path, class: "navbar-item" %>
           <% else %>
             <%= link_to "Account", edit_user_registration_path, class: "navbar-item" %>
+            <%= link_to "Sign out", destroy_user_session_path, data: { turbo_method: :delete }, class: "navbar-item"  %>
           <% end %>
         </div>
       </div>
-    </nav>g
+    </nav>
 
     <% if notice %>
       <section class="section">
@@ -38,7 +39,7 @@
     <% end %>
     <% if alert %>
       <section class="section">
-        <p class="alert alert-danger has-text-danger"><%= notice %></p>
+        <p class="alert alert-danger has-text-danger"><%= alert %></p>
       </section>
     <% end %>
 

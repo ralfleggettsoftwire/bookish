@@ -36,7 +36,7 @@
       </p>
       <ul class="menu-list">
         <li><%= link_to "See more from #{@book.author.name}", author_path(@book.author.id) %></li>
-        <li><%= link_to "See copies of #{@book.title}", book_copies_path(@book.author.id) %></li>
+        <li><%= link_to "See copies of #{@book.title}", book_copies_path(@book) %></li>
       </ul>
     </div>
   </div>

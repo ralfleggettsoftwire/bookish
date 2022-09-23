@@ -1,6 +1,7 @@
 class CopiesController < ApplicationController
   before_action :set_copy, only: %i[ edit update destroy ]
   before_action :set_book
+  before_action :authenticate_user!, only: %i[ new edit update destroy]
 
   # GET /books/1/copies or /books/1/copies.json
   def index
@@ -64,6 +65,6 @@ class CopiesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def copy_params
-      params.fetch(:copy, {}).permit(:status, :borrower, :due_date)
+      params.fetch(:copy, {}).permit(:status, :user_id, :due_date)
     end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_22_141438) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_22_154110) do
   create_table "authors", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -37,9 +37,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_22_141438) do
     t.datetime "updated_at", null: false
     t.integer "book_id"
     t.string "status", default: "available", null: false
-    t.string "borrower"
     t.date "due_date"
+    t.integer "user_id"
     t.index ["book_id"], name: "index_copies_on_book_id"
+    t.index ["user_id"], name: "index_copies_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -50,10 +51,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_22_141438) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "books", "authors"
   add_foreign_key "copies", "books"
+  add_foreign_key "copies", "users"
 end

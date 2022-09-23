@@ -5,6 +5,20 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+user_1 = User.create(
+  email: "ralf.leggett@softwire.com",
+  name: "Ralf",
+  password: "Testing",
+  password_confirmation: "Testing"
+)
+
+user_2 = User.create(
+  email: "made.up@gmail.com",
+  name: "John",
+  password: "Testing",
+  password_confirmation: "Testing"
+)
+
 fitzgerald = Author.create(
   name: 'Francis Scott Fitzgerald',
   born: Date.parse('1896-09-24'),
@@ -22,7 +36,6 @@ gatsby = Book.create(
 
 gatsby_copy_1 = Copy.create(
   status: 'on loan',
-  borrower: 'John Smith',
   due_date: Date.parse('2022-10-01')
 )
 
@@ -30,7 +43,6 @@ gatsby_copy_2 = Copy.create(status: 'available')
 
 gatsby_copy_3 = Copy.create(
   status: 'on loan',
-  borrower: 'Sam Smith',
   due_date: Date.parse('2022-10-10')
 )
 
@@ -56,7 +68,6 @@ tender_night = Book.create(
 
 tender_night_copy_1 = Copy.create(
   status: 'on loan',
-  borrower: 'Jane Doe',
   due_date: Date.parse('2022-10-28')
 )
 tender_night_copy_2 = Copy.create(status: 'available')
@@ -77,6 +88,11 @@ jazz_age.copies << jazz_age_copy_3
 tender_night.copies << tender_night_copy_1
 tender_night.copies << tender_night_copy_2
 tender_night.copies << tender_night_copy_3
+
+user_1.copies << gatsby_copy_1
+user_2.copies << gatsby_copy_3
+
+user_1.copies << tender_night_copy_1
 
 harper_lee = Author.create(
   name: 'Nelle Harper Lee',
